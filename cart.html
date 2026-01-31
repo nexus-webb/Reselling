@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nexus AI — Cart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-wrap" aria-hidden="true">
+    <div class="bg-anim"></div>
+    <div class="background-glow"></div>
+    <div class="grid-overlay"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="Nexus AI Home">
+        <div class="brand-logo">NΞ</div>
+        <div class="brand-text">
+          <div class="brand-name">Nexus AI</div>
+          <div class="brand-sub">Community</div>
+        </div>
+      </a>
+
+      <nav class="topnav" aria-label="Primary">
+        <a class="toplink" href="index.html">Home</a>
+        <a class="toplink" href="products.html">Products</a>
+        <a class="toplink" href="contact.html">Contact</a>
+      </nav>
+
+      <div class="top-actions">
+        <a class="cart-btn" href="cart.html" aria-label="View cart">
+          <span class="cart-icon" aria-hidden="true">🛒</span>
+          <span class="cart-label">Cart</span>
+          <span class="cart-badge" data-cart-badge style="display:none;">0</span>
+        </a>
+
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" type="button">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="topnav-mobile" hidden>
+      <a class="toplink" href="index.html">Home</a>
+      <a class="toplink" href="products.html">Products</a>
+      <a class="toplink" href="contact.html">Contact</a>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="section reveal reveal-visible">
+      <div class="container">
+        <h2 class="section-title">Cart</h2>
+        <p class="section-subtitle">Review your items, adjust quantity, then proceed to checkout.</p>
+
+        <div class="checkout-stack">
+          <div class="card">
+            <div class="card-header">
+              <span class="pill">Items</span>
+              <h3>Summary</h3>
+            </div>
+
+            <div id="cartBox"></div>
+
+            <div id="cartActions" class="btn-group" style="margin-top:14px; display:none;">
+              <a class="btn btn-ghost btn-compact" href="products.html">Add More</a>
+              <a class="btn btn-primary btn-compact" href="checkout.html">Checkout</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

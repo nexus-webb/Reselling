@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Nexus AI — Checkout</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="style.css" rel="stylesheet"/>
+</head>
+<body>
+  <div class="bg-wrap" aria-hidden="true">
+    <div class="bg-anim"></div>
+    <div class="background-glow"></div>
+    <div class="grid-overlay"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+    <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="Nexus AI Home">
+        <div class="brand-logo">NΞ</div>
+        <div class="brand-text">
+          <div class="brand-name">Nexus AI</div>
+          <div class="brand-sub">Community</div>
+        </div>
+      </a>
+
+      <nav class="topnav" aria-label="Primary">
+        <a class="toplink" href="index.html">Home</a>
+        <a class="toplink" href="products.html">Products</a>
+        <a class="toplink" href="contact.html">Contact</a>
+      </nav>
+
+      <div class="top-actions">
+        <a class="cart-btn" href="cart.html" aria-label="View cart">
+          <span class="cart-icon" aria-hidden="true">🛒</span>
+          <span class="cart-label">Cart</span>
+          <span class="cart-badge" data-cart-badge style="display:none;">0</span>
+        </a>
+
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" type="button">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="topnav-mobile" hidden>
+      <a class="toplink" href="index.html">Home</a>
+      <a class="toplink" href="products.html">Products</a>
+        <a class="toplink" href="contact.html">Contact</a>
+    </div>
+  </header>
+<main class="page" id="cart">
+<section class="section reveal reveal-visible">
+<div class="container">
+<h2 class="section-title">Checkout</h2>
+<p class="section-subtitle">Enter your email, choose payment method, submit order, then pay using instructions shown.</p>
+<div class="checkout-stack">
+<div class="card">
+<div class="card-header">
+<span class="pill">Order</span>
+<h3>Summary</h3>
+</div>
+<div id="summary"></div>
+<div class="cart-total" style="margin-top:12px;">
+<span>Total</span>
+<span id="total">$0.00</span>
+</div>
+<div class="btn-group" style="margin-top:14px;">
+<a class="btn btn-ghost btn-compact" href="cart.html">Back</a>
+<a class="btn btn-card btn-compact" href="products.html">Add More</a>
+</div>
+</div>
+<div class="card">
+<div class="card-header">
+<span class="pill">Details</span>
+<h3>Place Order</h3>
+</div>
+<form action="/success.html" data-netlify="true" id="orderForm" method="POST" name="order" netlify-honeypot="bot-field">
+<input name="form-name" type="hidden" value="order"/>
+<p style="display:none;">
+<label>Don’t fill this out: <input name="bot-field"/></label>
+</p>
+<label class="form-label">Email</label>
+<input class="form-input" name="customer_email" placeholder="you@example.com" required="" type="email"/>
+<label class="form-label">Payment Method</label>
+<select class="form-input" id="payMethod" name="payment_method" required="">
+<option value="">Select...</option>
+<option value="CashApp">CashApp</option>
+<option value="Venmo">Venmo</option>
+<option value="PayPal">PayPal</option>
+</select>
+<input id="orderItems" name="order_items" type="hidden"/>
+<input id="orderTotal" name="order_total" type="hidden"/>
+<div class="pay-instructions" id="payBox" style="display:none; margin-top:14px;"></div>
+<button class="btn btn-primary" style="margin-top:14px; width:100%;" type="submit">
+                Submit Order
+              </button>
+</form>
+<div class="payments-note" style="margin-top:10px;">
+              After you submit, complete payment using the instructions shown. We match payments using your email.
+            </div>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+  <script src="app.js"></script>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const sel = document.getElementById("payMethod");
+  const box = document.getElementById("payBox");
+  if (!sel || !box) return;
+
+  const render = () => {
+    const method = sel.value || "";
+    if (!method) {
+      box.style.display = "none";
+      box.innerHTML = "";
+      return;
+    }
+
+    const total = (window.money ? window.money(window.cartTotal()) : "$" + (window.cartTotal ? window.cartTotal().toFixed(2) : "0.00"));
+    box.style.display = "block";
+    box.innerHTML = `
+      <div class="pill pill-outline">${method} Instructions</div>
+      <div class="pay-note">
+        After you submit your order, open a <b>Purchase Ticket</b> in our Discord and send <b>${total}</b> using <b>${method}</b>.
+        Use the <b>same email</b> you entered on this form so we can match your payment quickly.
+      </div>
+      <div class="btn-group" style="margin-top:10px;">
+        <a class="btn btn-card btn-compact" href="https://discord.gg/E5k4tfnYwZ" target="_blank" rel="noopener">Open Discord</a>
+      </div>
+    `;
+  };
+
+  sel.addEventListener("change", render);
+  render();
+});
+  </script>
+
+</body>
+</html>
