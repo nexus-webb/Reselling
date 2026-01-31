@@ -178,15 +178,41 @@ status: ONLINE
   </main>
 
   <script src="app.js"></script>
-y => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('reveal-visible');
-          revealObserver.unobserve(entry.target);
+  <script>
+    // Mobile nav toggle (only if your CSS uses [hidden])
+    (function () {
+      const btn = document.querySelector(".nav-toggle");
+      const mobile = document.querySelector(".topnav-mobile");
+      if (!btn || !mobile) return;
+
+      btn.addEventListener("click", () => {
+        const isOpen = !mobile.hasAttribute("hidden");
+        if (isOpen) {
+          mobile.setAttribute("hidden", "");
+          btn.setAttribute("aria-expanded", "false");
+        } else {
+          mobile.removeAttribute("hidden");
+          btn.setAttribute("aria-expanded", "true");
         }
       });
-    }, { threshold: 0.15 });
+    })();
 
-    revealSections.forEach(sec => revealObserver.observe(sec));
+    // Reveal animation
+    (function () {
+      const revealSections = document.querySelectorAll(".reveal");
+      if (!revealSections.length) return;
+
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal-visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      revealSections.forEach((sec) => obs.observe(sec));
+    })();
   </script>
 
   <!-- ✅ Cart logic in external file -->
