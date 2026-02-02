@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -7,50 +8,45 @@
 <link href="style.css" rel="stylesheet"/>
 </head>
 <body>
-  <div class="bg-wrap" aria-hidden="true">
-    <div class="bg-anim"></div>
-    <div class="background-glow"></div>
-    <div class="grid-overlay"></div>
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-  </div>
-
-    <header class="topbar">
-    <div class="topbar-inner">
-      <a class="brand" href="index.html" aria-label="Nexus AI Home">
-        <div class="brand-logo">NΞ</div>
-        <div class="brand-text">
-          <div class="brand-name">Nexus AI</div>
-          <div class="brand-sub">Community</div>
-        </div>
-      </a>
-
-      <nav class="topnav" aria-label="Primary">
-        <a class="toplink" href="index.html">Home</a>
-        <a class="toplink" href="products.html">Products</a>
-        <a class="toplink" href="contact.html">Contact</a>
-      </nav>
-
-      <div class="top-actions">
-        <a class="cart-btn" href="cart.html" aria-label="View cart">
-          <span class="cart-icon" aria-hidden="true">🛒</span>
-          <span class="cart-label">Cart</span>
-          <span class="cart-badge" data-cart-badge style="display:none;">0</span>
-        </a>
-
-        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" type="button">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-
-    <div class="topnav-mobile" hidden>
-      <a class="toplink" href="index.html">Home</a>
-      <a class="toplink" href="products.html">Products</a>
-        <a class="toplink" href="contact.html">Contact</a>
-    </div>
-  </header>
+<div aria-hidden="true" class="bg-wrap">
+<div class="bg-anim"></div>
+<div class="background-glow"></div>
+<div class="grid-overlay"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+</div>
+<header class="topbar">
+<div class="topbar-inner">
+<a aria-label="Nexus AI Home" class="brand" href="index.html">
+<div class="brand-logo">NΞ</div>
+<div class="brand-text">
+<div class="brand-name">Nexus AI</div>
+<div class="brand-sub">Community</div>
+</div>
+</a>
+<nav aria-label="Primary" class="topnav">
+<a class="toplink" href="index.html">Home</a>
+<a class="toplink" href="products.html">Products</a>
+<a class="toplink" href="contact.html">Contact</a>
+</nav>
+<div class="top-actions">
+<a aria-label="View cart" class="cart-btn" href="cart.html">
+<span aria-hidden="true" class="cart-icon">🛒</span>
+<span class="cart-label">Cart</span>
+<span class="cart-badge" data-cart-badge="" style="display:none;">0</span>
+</a>
+<button aria-expanded="false" aria-label="Open menu" class="nav-toggle" type="button">
+<span></span><span></span><span></span>
+</button>
+</div>
+</div>
+<div class="topnav-mobile" hidden="">
+<a class="toplink" href="index.html">Home</a>
+<a class="toplink" href="products.html">Products</a>
+<a class="toplink" href="contact.html">Contact</a>
+</div>
+</header>
 <main class="page">
 <section class="section reveal reveal-visible">
 <div class="container">
@@ -73,12 +69,7 @@
 <li>50k+ Movies</li>
 <li>11k+ Live Channels</li>
 </ul>
-<div class="btn-group">
-<button class="btn btn-primary btn-compact" onclick="addToCart({id:'starshare_1y', name:'StarShare IPTV - 1 Year', price:50})">
-                Add to Cart
-              </button>
-<a class="btn btn-card btn-compact" href="cart.html">View Cart</a>
-</div>
+<div class="btn-group product-actions"><label class="sr-only" for="qty-starshare_1y">Quantity</label><select aria-label="Quantity" class="cart-qty-select" id="qty-starshare_1y"><option selected="selected" value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option></select><button class="btn btn-primary btn-compact" onclick="addToCart({id:'starshare_1y', name:'StarShare IPTV - 1 Year', price:50}, document.getElementById('qty-starshare_1y').value)">Add to Cart</button></div>
 </div>
 <div class="card">
 <div class="card-header">
@@ -94,11 +85,50 @@
 <li>50k+ Movies</li>
 <li>11k+ Live Channels</li>
 </ul>
-<div class="btn-group">
-<button class="btn btn-primary btn-compact" onclick="addToCart({id:'starshare_6m', name:'StarShare IPTV - 6 Months', price:30})">
-                Add to Cart
-              </button>
-<a class="btn btn-card btn-compact" href="cart.html">View Cart</a>
+<div class="btn-group product-actions"><label class="sr-only" for="qty-starshare_6m">Quantity</label><select aria-label="Quantity" class="cart-qty-select" id="qty-starshare_6m"><option selected="selected" value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option></select><button class="btn btn-primary btn-compact" onclick="addToCart({id:'starshare_6m', name:'StarShare IPTV - 6 Months', price:30}, document.getElementById('qty-starshare_6m').value)">Add to Cart</button></div>
+</div>
+</div>
+
+<div class="gallery-block" style="margin-top:26px;">
+<div class="card-header" style="padding:0; margin-bottom:10px;">
+<span class="pill pill-outline">Preview</span>
+<h3 style="margin:0;">Product Gallery</h3>
+</div>
+<p class="section-subtitle" style="margin-top:6px;">
+    Add screenshots, short clips, or demo videos so visitors can see what they’re getting.
+  </p>
+<div aria-label="Product gallery" class="media-grid">
+<!-- IMAGE EXAMPLE:
+    <figure class="media-tile">
+      <img src="assets/gallery/preview-1.jpg" alt="StarShare IPTV channel list preview" loading="lazy" />
+      <figcaption>Channel list preview</figcaption>
+    </figure>
+    -->
+<!-- VIDEO EXAMPLE:
+    <figure class="media-tile">
+      <video src="assets/gallery/demo-1.mp4" controls preload="metadata"></video>
+      <figcaption>Quick demo walkthrough</figcaption>
+    </figure>
+    -->
+<div class="media-tile media-placeholder">
+<div class="media-placeholder-inner">
+<div class="pill pill-online">Tip</div>
+<h4 style="margin-top:10px;">Create an <code>assets/gallery</code> folder</h4>
+<p style="color:var(--text-muted); margin-top:6px;">
+          Drop your images/videos there, then paste <code>&lt;img&gt;</code> or <code>&lt;video&gt;</code> tiles above.
+        </p>
+</div>
+</div>
+<div class="media-tile media-placeholder">
+<div class="media-placeholder-inner">
+<div class="pill pill-outline">Supports</div>
+<p style="margin-top:10px; color:var(--text-soft);">
+          JPG / PNG / WEBP images and MP4 videos.
+        </p>
+<p style="color:var(--text-muted); margin-top:6px;">
+          Keep videos short for fast loading.
+        </p>
+</div>
 </div>
 </div>
 </div>
@@ -108,7 +138,6 @@
 </div>
 </section>
 </main>
-
-  <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

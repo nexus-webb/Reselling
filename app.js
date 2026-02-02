@@ -18,16 +18,20 @@ function saveCart(cart) {
   updateCartBadge();
 }
 
-function addToCart(item) {
+function addToCart(item, qty = 1) {
   // item = { id: "starshare_1y", name: "StarShare IPTV - 1 Year", price: 50 }
+  // qty = number (optional). Products page can add multiple at once.
   const cart = getCart();
   const existing = cart.find((x) => x.id === item.id);
 
-  if (existing) existing.qty += 1;
-  else cart.push({ ...item, qty: 1 });
+  const n = Math.max(1, Number(qty || 1));
+
+  if (existing) existing.qty += n;
+  else cart.push({ ...item, qty: n });
 
   saveCart(cart);
 }
+
 
 function removeFromCart(id) {
   const cart = getCart().filter((x) => x.id !== id);

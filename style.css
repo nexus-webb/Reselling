@@ -1492,3 +1492,173 @@ min-height: 100vh;
     gap:10px;
   }
 }
+
+
+/* ===========================
+   Products page: qty selector + gallery
+   (Theme-safe: uses existing CSS variables)
+=========================== */
+
+.product-actions{
+  align-items:center;
+  gap:12px;
+}
+
+.product-actions .cart-qty-select{
+  min-width:86px;
+}
+
+/* Gallery */
+.gallery-block .section-subtitle{
+  max-width:780px;
+}
+
+.media-grid{
+  display:grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap:14px;
+  margin-top:14px;
+}
+
+.media-tile{
+  grid-column: span 6;
+  position:relative;
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  overflow:hidden;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.30);
+}
+
+.media-tile img,
+.media-tile video{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  display:block;
+}
+
+.media-tile figcaption{
+  padding:10px 12px;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  background: rgba(0,0,0,0.14);
+}
+
+.media-placeholder{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height: 320px;
+}
+
+.media-placeholder-inner{
+  padding:18px;
+  text-align:center;
+}
+
+@media (max-width: 900px){
+  .media-tile{ grid-column: span 12; }
+  .media-tile img,
+  .media-tile video{ height:220px; }
+}
+
+/* ===========================
+   Success page: fireworks + centered layout
+=========================== */
+
+.success-center{
+  justify-content:center;
+}
+
+.success-copy{
+  color: var(--text-soft);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  text-align:center;
+}
+
+.success-subcopy{
+  color: var(--text-muted);
+  margin-top: 8px;
+  text-align:center;
+}
+
+.success-tips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+  margin-top: 14px;
+}
+
+.tip-pill{
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.18);
+  color: var(--text-soft);
+  font-size: 0.92rem;
+}
+
+/* Fireworks (CSS-only, lightweight) */
+.success-container{
+  position:relative;
+}
+
+.fireworks{
+  position:absolute;
+  inset:-30px 0 auto 0;
+  height: 220px;
+  pointer-events:none;
+  z-index: 0;
+}
+
+.fireworks .fw{
+  position:absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  opacity: 0.0;
+  filter: drop-shadow(0 0 10px rgba(255, 0, 200, 0.35));
+  animation: fwPop 2.6s infinite ease-out;
+}
+
+.fireworks .fw::before,
+.fireworks .fw::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(255,0,200,0.0) 70%);
+}
+
+.fireworks .fw::after{
+  transform: scale(1.8);
+  opacity:0.65;
+}
+
+.fireworks .fw-1{ left:18%; top:48%; animation-delay: 0.0s; }
+.fireworks .fw-2{ left:32%; top:30%; animation-delay: 0.35s; }
+.fireworks .fw-3{ left:50%; top:40%; animation-delay: 0.7s; }
+.fireworks .fw-4{ left:68%; top:28%; animation-delay: 1.05s; }
+.fireworks .fw-5{ left:82%; top:52%; animation-delay: 1.4s; }
+.fireworks .fw-6{ left:24%; top:70%; animation-delay: 1.75s; }
+.fireworks .fw-7{ left:58%; top:72%; animation-delay: 2.1s; }
+.fireworks .fw-8{ left:74%; top:66%; animation-delay: 2.45s; }
+
+@keyframes fwPop{
+  0%   { transform: scale(0.4); opacity:0; }
+  12%  { opacity: 0.95; }
+  40%  { transform: scale(2.6); opacity:0.55; }
+  72%  { transform: scale(3.3); opacity:0.0; }
+  100% { transform: scale(3.3); opacity:0.0; }
+}
+
+/* keep content above fireworks */
+.success-center .card{
+  position:relative;
+  z-index: 1;
+}
+
