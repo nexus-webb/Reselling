@@ -19,7 +19,9 @@
 <header class="topbar">
 <div class="topbar-inner">
 <a aria-label="Nexus AI Home" class="brand" href="index.html">
-<div class="brand-logo">NΞ</div>
+<div class="logo">
+  <img src="assets/logos/Logo.jpg" alt="Nexus AI" class="logo-image">
+</div>
 <div class="brand-text">
 <div class="brand-name">Nexus AI</div>
 <div class="brand-sub">Community</div>
@@ -62,7 +64,7 @@
 </div>
 <p>
               Full access subscription for 12 months.
-              <br/><b>$50.00</b>
+              <br/><b>$60.00</b>
 </p>
 <ul class="card-list">
 <li>14k+ Web Series</li>
@@ -88,48 +90,101 @@
 <div class="btn-group product-actions"><label class="sr-only" for="qty-starshare_6m">Quantity</label><select aria-label="Quantity" class="cart-qty-select" id="qty-starshare_6m"><option selected="selected" value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option></select><button class="btn btn-primary btn-compact" onclick="addToCart({id:'starshare_6m', name:'StarShare IPTV - 6 Months', price:30}, document.getElementById('qty-starshare_6m').value)">Add to Cart</button></div>
 </div>
 </div>
+<p></p>
+<p></p>
 
+<h2 class="section-title">Product Gallery</h2>
+<p class="section-subtitle">
+          Check-out all the Images related to our IPTV product
+        </p>
 <div class="gallery-block" style="margin-top:26px;">
 <div class="card-header" style="padding:0; margin-bottom:10px;">
-<span class="pill pill-outline">Preview</span>
-<h3 style="margin:0;">Product Gallery</h3>
 </div>
-<p class="section-subtitle" style="margin-top:6px;">
-    Add screenshots, short clips, or demo videos so visitors can see what they’re getting.
-  </p>
-<div aria-label="Product gallery" class="media-grid">
-<!-- IMAGE EXAMPLE:
-    <figure class="media-tile">
-      <img src="assets/gallery/preview-1.jpg" alt="StarShare IPTV channel list preview" loading="lazy" />
-      <figcaption>Channel list preview</figcaption>
+
+<div class="gallery-block" style="margin-top:26px;">
+
+  <div aria-label="Product gallery" class="media-grid">
+
+    <!-- IPTV -->
+    <figure class="media-tile media-carousel"
+      data-interval="2000"
+      data-carousel='{
+        "title": "IPTV App",
+        "items": [
+          {"type":"image","src":"assets/gallery/IPTV/1.png","alt":"IPTV preview 1"},
+          {"type":"image","src":"assets/gallery/IPTV/2.png","alt":"IPTV preview 2"}
+        ]
+      }'>
+      <div class="carousel-viewport">
+        <button class="carousel-btn prev" type="button" aria-label="Previous">‹</button>
+        <div class="carousel-track" aria-label="Carousel slides"></div>
+        <button class="carousel-btn next" type="button" aria-label="Next">›</button>
+
+        <div class="carousel-dots" aria-label="Carousel pagination"></div>
+      </div>
+      <figcaption>IPTV App</figcaption>
     </figure>
-    -->
-<!-- VIDEO EXAMPLE:
-    <figure class="media-tile">
-      <video src="assets/gallery/demo-1.mp4" controls preload="metadata"></video>
-      <figcaption>Quick demo walkthrough</figcaption>
+
+    <!-- Movies -->
+    <figure class="media-tile media-carousel"
+      data-interval="2000"
+      data-carousel='{
+        "title": "Movies",
+        "items": [
+          {"type":"image","src":"assets/gallery/Movies/1.png","alt":"Movies preview 1"},
+          {"type":"image","src":"assets/gallery/Movies/2.png","alt":"Movies preview 2"}
+        ]
+      }'>
+      <div class="carousel-viewport">
+        <button class="carousel-btn prev" type="button" aria-label="Previous">‹</button>
+        <div class="carousel-track" aria-label="Carousel slides"></div>
+        <button class="carousel-btn next" type="button" aria-label="Next">›</button>
+
+        <div class="carousel-dots" aria-label="Carousel pagination"></div>
+      </div>
+      <figcaption>Movies</figcaption>
     </figure>
-    -->
-<div class="media-tile media-placeholder">
-<div class="media-placeholder-inner">
-<div class="pill pill-online">Tip</div>
-<h4 style="margin-top:10px;">Create an <code>assets/gallery</code> folder</h4>
-<p style="color:var(--text-muted); margin-top:6px;">
-          Drop your images/videos there, then paste <code>&lt;img&gt;</code> or <code>&lt;video&gt;</code> tiles above.
-        </p>
-</div>
-</div>
-<div class="media-tile media-placeholder">
-<div class="media-placeholder-inner">
-<div class="pill pill-outline">Supports</div>
-<p style="margin-top:10px; color:var(--text-soft);">
-          JPG / PNG / WEBP images and MP4 videos.
-        </p>
-<p style="color:var(--text-muted); margin-top:6px;">
-          Keep videos short for fast loading.
-        </p>
-</div>
-</div>
+
+    <!-- Live TV -->
+    <figure class="media-tile media-carousel"
+      data-interval="2000"
+      data-carousel='{
+        "title": "Live TV",
+        "items": [
+          {"type":"image","src":"assets/gallery/LiveTV/1.png","alt":"Live TV preview 1"},
+          {"type":"image","src":"assets/gallery/LiveTV/2.png","alt":"Live TV preview 2"}
+        ]
+      }'>
+      <div class="carousel-viewport">
+        <button class="carousel-btn prev" type="button" aria-label="Previous">‹</button>
+        <div class="carousel-track" aria-label="Carousel slides"></div>
+        <button class="carousel-btn next" type="button" aria-label="Next">›</button>
+
+        <div class="carousel-dots" aria-label="Carousel pagination"></div>
+      </div>
+      <figcaption>Live TV</figcaption>
+    </figure>
+
+    <!-- Web Series -->
+    <figure class="media-tile media-carousel"
+      data-interval="2000"
+      data-carousel='{
+        "title": "Web Series",
+        "items": [
+          {"type":"image","src":"assets/gallery/WebSeries/1.png","alt":"Web Series preview 1"},
+          {"type":"image","src":"assets/gallery/WebSeries/2.png","alt":"Web Series preview 2"}
+        ]
+      }'>
+      <div class="carousel-viewport">
+        <button class="carousel-btn prev" type="button" aria-label="Previous">‹</button>
+        <div class="carousel-track" aria-label="Carousel slides"></div>
+        <button class="carousel-btn next" type="button" aria-label="Next">›</button>
+
+        <div class="carousel-dots" aria-label="Carousel pagination"></div>
+      </div>
+      <figcaption>Web Series</figcaption>
+    </figure>
+  </div>
 </div>
 </div>
 <div class="btn-group" style="margin-top:16px;">

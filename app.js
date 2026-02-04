@@ -18,20 +18,16 @@ function saveCart(cart) {
   updateCartBadge();
 }
 
-function addToCart(item, qty = 1) {
+function addToCart(item) {
   // item = { id: "starshare_1y", name: "StarShare IPTV - 1 Year", price: 50 }
-  // qty = number (optional). Products page can add multiple at once.
   const cart = getCart();
   const existing = cart.find((x) => x.id === item.id);
 
-  const n = Math.max(1, Number(qty || 1));
-
-  if (existing) existing.qty += n;
-  else cart.push({ ...item, qty: n });
+  if (existing) existing.qty += 1;
+  else cart.push({ ...item, qty: 1 });
 
   saveCart(cart);
 }
-
 
 function removeFromCart(id) {
   const cart = getCart().filter((x) => x.id !== id);
@@ -340,6 +336,231 @@ window.renderCartPage = renderCartPage;
 window.renderCheckoutSummary = renderCheckoutSummary;
 
 /* -----------------------------
+   GALLERY CAROUSELS + LIGHTBOX
+   - Uses HTML: .media-carousel[data-carousel='{"title":"App","items":[...]}']
+   - Optional: data-interval="5000" (ms)
+----------------------------- */
+
+let __lbState = null;
+
+function ensureLightbox() {
+  let lb = document.getElementById("mediaLightbox");
+  if (lb) return lb;
+
+  lb = document.createElement("div");
+  lb.id = "mediaLightbox";
+  lb.className = "lightbox";
+  lb.innerHTML = `
+    <div class="lightbox-backdrop" data-close="1"></div>
+    <div class="lightbox-panel" role="dialog" aria-modal="true" aria-label="Media preview">
+      <button class="lightbox-close" type="button" aria-label="Close" data-close="1">✕</button>
+      <button class="lightbox-nav prev" type="button" aria-label="Previous">‹</button>
+      <div class="lightbox-body"></div>
+      <button class="lightbox-nav next" type="button" aria-label="Next">›</button>
+      <div class="lightbox-caption"></div>
+    </div>
+  `;
+  document.body.appendChild(lb);
+
+  lb.addEventListener("click", (e) => {
+    const t = e.target;
+    if (t && t.getAttribute && t.getAttribute("data-close")) closeLightbox();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (!lb.classList.contains("open")) return;
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowLeft" && __lbState && __lbState.onPrev) __lbState.onPrev(true);
+    if (e.key === "ArrowRight" && __lbState && __lbState.onNext) __lbState.onNext(true);
+  });
+
+  return lb;
+}
+
+function closeLightbox() {
+  const lb = document.getElementById("mediaLightbox");
+  if (!lb) return;
+  lb.classList.remove("open");
+  const body = lb.querySelector(".lightbox-body");
+  if (body) body.innerHTML = "";
+  __lbState = null;
+}
+
+function renderLightbox() {
+  const lb = document.getElementById("mediaLightbox");
+  if (!lb || !__lbState) return;
+
+  const { items, index, title } = __lbState;
+  const item = items[index];
+
+  const body = lb.querySelector(".lightbox-body");
+  const cap = lb.querySelector(".lightbox-caption");
+  if (!body || !cap) return;
+
+  body.innerHTML = "";
+
+  if (item.type === "video") {
+    const v = document.createElement("video");
+    v.src = item.src;
+    v.controls = true;
+    v.autoplay = true;
+    v.playsInline = true;
+    v.preload = "metadata";
+    body.appendChild(v);
+  } else {
+    const img = document.createElement("img");
+    img.src = item.src;
+    img.alt = item.alt || "";
+    body.appendChild(img);
+  }
+
+  cap.textContent = (title || "").trim();
+}
+
+function openLightbox(state) {
+  const lb = ensureLightbox();
+  __lbState = state;
+  lb.classList.add("open");
+  renderLightbox();
+}
+
+function initGalleryCarousels() {
+  const els = document.querySelectorAll(".media-carousel[data-carousel]");
+  if (!els.length) return;
+
+  els.forEach((el) => {
+    let data = {};
+    try {
+      data = JSON.parse(el.getAttribute("data-carousel") || "{}");
+    } catch {
+      data = {};
+    }
+
+    const title = data.title || "";
+    const items = Array.isArray(data.items) ? data.items : [];
+    if (!items.length) return;
+
+    const interval = Math.max(1200, Number(el.getAttribute("data-interval") || 5000));
+
+    const track = el.querySelector(".carousel-track");
+    const dots = el.querySelector(".carousel-dots");
+    const prev = el.querySelector(".carousel-btn.prev");
+    const next = el.querySelector(".carousel-btn.next");
+    if (!track || !dots || !prev || !next) return;
+
+    track.innerHTML = "";
+    dots.innerHTML = "";
+
+    const slides = items.map((it, i) => {
+      const s = document.createElement("div");
+      s.className = "carousel-slide";
+
+      if (it.type === "video") {
+        const v = document.createElement("video");
+        v.src = it.src;
+        v.controls = true;
+        v.preload = "metadata";
+        v.setAttribute("playsinline", "");
+        s.appendChild(v);
+      } else {
+        const img = document.createElement("img");
+        img.src = it.src;
+        img.alt = it.alt || title || "";
+        img.loading = "lazy";
+        s.appendChild(img);
+
+        // Zoom opens lightbox
+        s.addEventListener("click", () => {
+          openLightbox({
+            title,
+            items,
+            index: idx,
+            onPrev: () => setIndex(idx - 1, true),
+            onNext: () => setIndex(idx + 1, true),
+          });
+        });
+      }
+
+      // keyboard
+      s.tabIndex = 0;
+      s.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          s.click();
+        }
+      });
+
+      track.appendChild(s);
+
+      const d = document.createElement("button");
+      d.type = "button";
+      d.className = "carousel-dot";
+      d.setAttribute("aria-label", `Go to slide ${i + 1}`);
+      d.addEventListener("click", () => setIndex(i, true));
+      dots.appendChild(d);
+
+      return { slide: s, dot: d };
+    });
+
+    let idx = 0;
+    let timer = null;
+    let paused = false;
+
+    function setActive() {
+      slides.forEach((x, i) => {
+        x.slide.classList.toggle("active", i === idx);
+        x.dot.classList.toggle("active", i === idx);
+      });
+    }
+
+    function setIndex(nextIndex, userAction) {
+      const n = slides.length;
+      idx = (nextIndex + n) % n;
+      setActive();
+
+      // keep lightbox in sync
+      const lb = document.getElementById("mediaLightbox");
+      if (lb && lb.classList.contains("open") && __lbState && __lbState.items === items) {
+        __lbState.index = idx;
+        __lbState.onPrev = () => setIndex(idx - 1, true);
+        __lbState.onNext = () => setIndex(idx + 1, true);
+        renderLightbox();
+      }
+
+      if (userAction) restart();
+    }
+
+    function tick() {
+      if (paused) return;
+      setIndex(idx + 1, false);
+    }
+
+    function start() {
+      stop();
+      timer = window.setInterval(tick, interval);
+    }
+    function stop() {
+      if (timer) window.clearInterval(timer);
+      timer = null;
+    }
+    function restart() {
+      start();
+    }
+
+    prev.addEventListener("click", () => setIndex(idx - 1, true));
+    next.addEventListener("click", () => setIndex(idx + 1, true));
+
+    el.addEventListener("mouseenter", () => (paused = true));
+    el.addEventListener("mouseleave", () => (paused = false));
+    el.addEventListener("focusin", () => (paused = true));
+    el.addEventListener("focusout", () => (paused = false));
+
+    setActive();
+    start();
+  });
+}
+
+/* -----------------------------
    INIT
 ----------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
@@ -350,4 +571,5 @@ document.addEventListener("DOMContentLoaded", () => {
   // If these elements exist on the page, render automatically:
   renderCartPage();
   renderCheckoutSummary();
+  initGalleryCarousels();
 });
