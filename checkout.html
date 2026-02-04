@@ -138,10 +138,10 @@
       const total = window.cartTotal ? window.cartTotal() : 0;
       box.style.display = "block";
       box.innerHTML = `
-        <div class="pill pill-outline">CashApp Note</div>
+        <div class="pill pill-outline">Other Payment Methods Note</div>
         <div class="pay-note" style="margin-top:10px;">
-          You will be redirected to Stripe to complete payment.
-          If you prefer CashApp, open a <b>Purchase Ticket</b> in Discord after submitting and we’ll match your email.
+          For CashApp you will be redirected to Stripe to complete payment.
+          If you prefer Venmo or Paypal, open a <b>Purchase Ticket</b> in Discord after submitting and we’ll match your email.
           Total: <b>${moneyFmt(total)}</b>.
         </div>
         <div class="btn-group" style="margin-top:10px;">
